@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using System.Xml.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using XLua;
 
+[Hotfix]
 public class ResourcesTest : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -19,8 +22,22 @@ public class ResourcesTest : MonoBehaviour
         //GameObject obj = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefebs/Attack.prefab");
         //GameObject.Instantiate(obj);
 
-         CreatSerilize();
-       // DeSerilizer();
+        //CreatSerilize();
+        //DeSerilizer();
+        
+    }
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            DoLuaTest();
+        }
+    }
+
+    [Hotfix]
+    public void DoLuaTest()
+    {
+        Debug.Log("hello");
     }
 
     /// <summary>
@@ -36,7 +53,9 @@ public class ResourcesTest : MonoBehaviour
         testSerilizable.list.Add(2);
         //testSerilizable.dic = new Dictionary<int, string>();
         //testSerilizable.dic.Add(testSerilizable.Id, testSerilizable.Name);
-        XmlSerilize(testSerilizable);
+        //XmlSerilize(testSerilizable);
+
+        BianrySerTest(testSerilizable);
     }
 
     void XmlSerilize(TestSerilizable testSerilizable)
@@ -72,5 +91,38 @@ public class ResourcesTest : MonoBehaviour
         XmlSerializer xs = new XmlSerializer(typeof(TestSerilizable));
         TestSerilizable testSerilizable = (TestSerilizable)xs.Deserialize(fs);
         return testSerilizable;
+    }
+    //序列化成二进制
+    void BianrySerTest(TestSerilizable testSerilizable)
+    {
+        using (FileStream fs = new FileStream(Application.dataPath + "/Scripts/text.bytes", FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            bf.Serialize(fs, testSerilizable);
+        }
+    }
+    [LuaCallCSharp]
+    //二进制的反序列化
+    public void BinaryDeSeriliable()
+    {
+        //using (FileStream fs = new FileStream(Application.dataPath + "/Scripts/text.xml", FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
+        //{
+        //    BinaryFormatter bf = new BinaryFormatter();
+        //    TestSerilizable ts = (TestSerilizable)bf.Deserialize(fs);
+        //    Debug.Log(ts.Id);
+        //    Debug.Log(ts.Name);
+        //}
+    }
+    void BinaryDeSeriliable(int a)
+    {
+        ////特别注意后面的地址  LoadAssetAtPath默认地址为Assest文件夹
+        //TextAsset asset = UnityEditor.AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/Scripts/text.bytes");
+        //using (MemoryStream ms = new MemoryStream(asset.bytes))
+        //{
+        //    BinaryFormatter bf = new BinaryFormatter();
+        //    TestSerilizable ts = (TestSerilizable)bf.Deserialize(ms);
+        //    Debug.Log(ts.Id);
+        //    Debug.Log(ts.Name);
+        //}
     }
 }

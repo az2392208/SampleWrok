@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Xml.Serialization;
+using XLua;
 
 [System.Serializable]
+
 public class TestSerilizable
 {
     [XmlAttribute("Id")]
