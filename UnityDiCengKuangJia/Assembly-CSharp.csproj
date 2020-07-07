@@ -63,7 +63,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\GameData\Modle\benghuai\AutoRotation.cs" />
+    <Compile Include="Assets\Scripts\ResourcesTest.cs" />
+    <Compile Include="Assets\Scripts\TestSerilizable.cs" />
     <Compile Include="Assets\Test.cs" />
+    <None Include="Assets\GameData\Shaders\Xray.shader" />
+    <None Include="Assets\GameData\Shaders\Water.shader" />
+    <None Include="Assets\GameData\Shaders\Skybox.shader" />
+    <None Include="Assets\GameData\Modle\benghuai\cloud.shader" />
+    <None Include="Assets\Scripts\text.xml" />
+    <None Include="Assets\GameData\Modle\benghuai\benghuai.shader" />
     <Reference Include="UnityEngine">
       <HintPath>G:/Unity/2019.4.0f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -629,12 +638,7 @@
       <HintPath>C:/Users/Aive/Desktop/课程资料/SampleWrok/UnityDiCengKuangJia/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="My.csproj">
-      <Project>{92FCD571-E214-AAE8-DD46-D5DCE43F1464}</Project>
-      <Name>My</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup></ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
